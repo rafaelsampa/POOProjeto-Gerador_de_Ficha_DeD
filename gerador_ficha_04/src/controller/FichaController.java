@@ -20,7 +20,6 @@ import entities.Racas;
 
 public class FichaController {
 
-
     private FichaGUI NovaFichaGUI; // View Object
     private Ficha NovaFicha; // Model object
     private Racas RacaEscolhida;
@@ -107,9 +106,11 @@ public class FichaController {
         }
     }
     public void lisenerAntecedentes(ItemEvent local){
-        if(local.getStateChange() == ItemEvent.SELECTED){
+
+        if (local.getStateChange() == ItemEvent.SELECTED) {
             //askToSetAtencedentes((String) local.getItem());
         }
+
     }
 
     public void askToSetClasse(String classe){

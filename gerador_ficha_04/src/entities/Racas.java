@@ -31,6 +31,16 @@ public class Racas { // Ja to comecando a desistir dessa tbm, sera queé realmen
     }
     public void setElfo() {
 
+
+
+
+
+
+
+
+
+
+
     }
     public void setMeioElfo() {
 

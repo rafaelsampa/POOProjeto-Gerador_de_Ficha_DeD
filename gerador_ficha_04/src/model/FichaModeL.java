@@ -13,7 +13,7 @@ public class FichaModeL implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final String FILENAME = "FICHA_DE_PERSONAGEM.txt";
     
-
+    
     public void saveUserData(Ficha NovaFicha) {
         try {
             FileWriter writer = new FileWriter(FILENAME, true);
