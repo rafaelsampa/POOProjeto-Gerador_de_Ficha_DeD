@@ -14,14 +14,24 @@ import java.util.ArrayList;
 
 import javax.swing.JComboBox;
 
+import entities.Antecedentes;
+import entities.Classes;
+import entities.Racas;
+
 public class FichaController {
 
-    private Ficha NovaFicha; // Model object
+
     private FichaGUI NovaFichaGUI; // View Object
+    private Ficha NovaFicha; // Model object
+    private Racas RacaEscolhida;
+    private Classes ClasseEscolhida;
+    private Antecedentes AntecedentesEscolhido;
+    
     private JComboBox combo;
     private String itemSelected;
     private String itemDeselected;
-    private ArrayList<String> allItemsDeslecteds = new ArrayList<>();
+    private ArrayList<Integer> deselecteds = new ArrayList<>();
+    private JComboBox comboIntermediaria;
 
     public FichaController(Ficha NovaFicha, FichaGUI NovaFichaGUI){
         this.NovaFicha = NovaFicha;
@@ -32,161 +42,147 @@ public class FichaController {
         combo = inputCombo;
         return combo;
     }
-    
-    private void removeThisItem(JComboBox combo, String itemSel){
-        // if(itemSel == "15"){
-        //     combo.removeItem(itemSel);
-        //     allItemsDeslecteds.add("15");
-        // }else if(itemSel == "14"){
-        //     combo.removeItem(itemSel);
-        //     allItemsDeslecteds.add("14");
-        // }else if(itemSel == "13"){
-        //     combo.removeItem(itemSel);
-        //     allItemsDeslecteds.add("13");
-        // }else if(itemSel == "12"){
-        //     combo.removeItem(itemSel);
-        //     allItemsDeslecteds.add("12");
-        // }else if(itemSel == "10"){
-        //     combo.removeItem(itemSel);
-        //     allItemsDeslecteds.add("10");
-        // }else if(itemSel == "8"){
-        //     combo.removeItem(itemSel);
-        //     allItemsDeslecteds.add("8");
-        // }
-        if(itemSel == "15" || itemSel == "14" || itemSel == "13" || itemSel == "12" || itemSel == "10" || itemSel == "8"){
-            combo.removeItem(itemSel);
-            setCombo(combo);
-        }else{
-            // nao faca nada
-        }
+
+    public JComboBox setComboInter(JComboBox inputCombo){
+
+        comboIntermediaria = inputCombo;
+
+        return comboIntermediaria;
     }
+
+    public void ideiaDeMartins ( ItemEvent oEvento, JComboBox novaCombo){
+
+        ArrayList<String> vetorSelect = new ArrayList<>();
+        ArrayList<String> vetorDeselect = new ArrayList<>();
+        boolean verify;
+        itemSelected = (String) oEvento.getItem();
+
+        if(oEvento.getStateChange() == ItemEvent.SELECTED){
+
+            verify = vetorSelect.contains(itemSelected);
+            if(verify == false){
+                vetorSelect.add(itemSelected);
+                
+            }
+
+        }else if (oEvento.getStateChange() == ItemEvent.DESELECTED){
+
+            verify = vetorDeselect.contains(itemSelected);
+            if(verify == false){
+                vetorDeselect.add(itemSelected);
+            }
+            
+
+        }
+
+    }
+
+ 
 
     public void itemSelecionado_setCaracteristicas_dePersonagem(ItemEvent x, String[] vetor, JComboBox comb) {
         if (x.getStateChange() == ItemEvent.SELECTED) {
             itemSelected = (String) x.getItem();
-            setInfos();
-            removeThisItem(comb, itemSelected);
 
-            System.out.println("\nFoi selecionado " + itemSelected);
+            System.out.println("\nFoi SElecionado " + itemSelected);
             System.out.println( "\n__________________\n");
 
         }else if(x.getStateChange() == ItemEvent.DESELECTED){
             itemDeselected = (String) x.getItem();
+            System.out.println("\nFoi DEselecionado " + itemSelected);
+            System.out.println( "\n__________________\n");
 
         }else{
             System.out.println("\n\n\nSei la\n\n\n");
         }
     }
 
-    public void setInfos(){
-        switch (itemSelected) {
-            // Cada metodo desse vai usar um set de acordo com as especificacoes de Raca,
-            // Classe ou Antecedentes, tiradas do livro ofical de DeD
+    public void lisenerRaca(ItemEvent local){
+        if(local.getStateChange() == ItemEvent.SELECTED){
+            askToSetClasse((String) local.getItem());
+        }
+    }
+    public void lisenerClasse(ItemEvent local){
+        if(local.getStateChange() == ItemEvent.SELECTED){
+            askToSetClasse((String) local.getItem());
+        }
+    }
+    public void lisenerAntecedentes(ItemEvent local){
+        if(local.getStateChange() == ItemEvent.SELECTED){
+            //askToSetAtencedentes((String) local.getItem());
+        }
+    }
 
-            // RACAS    
-            case "Anão":
-                NovaFicha.setAnao();
-                break;
-            case "Elfo":
-                NovaFicha.setElfo();
-                break;
-            case "Halfling":
-                NovaFicha.setHalfling();
-                break;
-            case "Humano":
-                NovaFicha.setHumano();
-                break;
-            case "Draconato":
-                NovaFicha.setDraconato();
-                break;
-            case "Gnomo":
-                NovaFicha.setGnomo();
-                break;
-            case "Meio-Elfo":
-                NovaFicha.setMeioElfo();
-                break;  
-            case "Meio-Orc":
-                NovaFicha.setMeioOrc();
-                break;
-            case "Tiefling":
-                NovaFicha.setTiefling();
-                break;
-            // CLASSES
+    public void askToSetClasse(String classe){
+
+        switch (classe){
             case "Barbaro":
-                NovaFicha.setBarbaro();
+                ClasseEscolhida.setBarbaro();
                 break;
             case "Bardo":
-                NovaFicha.setBardo();
+                ClasseEscolhida.setBardo();
                 break;
             case "Bruxo":
-                NovaFicha.setBruxo();
+                ClasseEscolhida.setBruxo();
                 break;
             case "Clerigo":
-                NovaFicha.setClerigo();
+                ClasseEscolhida.setClerigo();
                 break;
             case "Druida":
-                NovaFicha.setDruida();
+                ClasseEscolhida.setDruida();
                 break;
             case "Feiticeiro":
-                NovaFicha.setFeiticeiro();
+                ClasseEscolhida.setFeiticeiro();
                 break;
             case "Guerreiro":
-                NovaFicha.setGuerreiro();
+                ClasseEscolhida.setGuerreiro();
                 break;
             case "Ladino":
-                NovaFicha.setLadino();
+                ClasseEscolhida.setLadino();
                 break;
             case "Mago":
-                NovaFicha.setMago();
+                ClasseEscolhida.setMago();
                 break;
             case "Monge":
-                NovaFicha.setMonge();
+                ClasseEscolhida.setMonge();
                 break;
             case "Paladino":
-                NovaFicha.setPaladino();
+                ClasseEscolhida.setPaladino();
                 break;
             case "Patrulheiro":
-                NovaFicha.setPatrulheiro();
+                ClasseEscolhida.setPatrulheiro();
                 break;
-            // ANTECEDENTES
-            case "Acólito":
-                NovaFicha.setAcolito();
+        }
+    }
+
+
+    public void askToSetRaca(String raca){
+        switch (raca) {         
+            case "Anão":
+                RacaEscolhida.setAnao();
                 break;
-            case "Artesão de Guilda":
-                NovaFicha.setArtesaoDeGuilda();
+            case "Elfo":
+                RacaEscolhida.setElfo();
                 break;
-            case "Artista":
-                NovaFicha.setArtista();
+            case "Halfling":
+                RacaEscolhida.setHalfling();
                 break;
-            case "Charlatão":
-                NovaFicha.setCharlatao();
+            case "Humano":
+                RacaEscolhida.setHumano();
                 break;
-            case "Criminoso":
-                NovaFicha.setCriminoso();
+            case "Draconato":
+                RacaEscolhida.setDraconato();
                 break;
-            case "Eremita":
-                NovaFicha.setEremita();
+            case "Gnomo":
+                RacaEscolhida.setGnomo();
                 break;
-            case "Forasteiro":
-                NovaFicha.setForasteiro();
+            case "Meio-Elfo":
+                RacaEscolhida.setMeioElfo();
+                break;  
+            case "Meio-Orc":
+                RacaEscolhida.setMeioOrc();
                 break;
-            case "Herói do Povo":
-                NovaFicha.setHeroiDoPovo();
-                break;
-            case "Marinheiro":
-                NovaFicha.setMarinheiro();
-                break;
-            case "Nobre":
-                NovaFicha.setNobre();
-                break;
-            case "Orfão":
-                NovaFicha.setOrfao();
-                break;
-            case "Sábio":
-               NovaFicha.setSabio();
-               break;
-            case "Soldado":
-                NovaFicha.setSoldado();
+            case "Tiefling":
+                RacaEscolhida.setTiefling();
                 break;
             default: // tratamento de Exception
 

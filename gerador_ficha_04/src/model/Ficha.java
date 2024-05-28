@@ -43,129 +43,6 @@ public class Ficha {
         
     }
 
-    // SETs RACAS ---------------------------------
-    public void setAnao() {
-        // Habiliades:
-        // - Visao no Escuro
-        // - Resiliencia Anã
-        // - Treinamento de Anão em Combate
-
-        this.CON = this.CON + 2;
-        this.deslocamento = 7.5;
-        profArmasSimples = true; // *
-        profArmasMarciais = true; // *
-        profFerramentas = true; // *
-
-    }
-    public void setElfo() {
-
-    }
-    public void setHalfling() {
-
-    }
-    public void setHumano() {
-        modAtributos = 1;
-        pontosdevida = 10; // BASE: um 1d10 + modCON
-        profArmasSimples = true; // todo true = todas, e false = nenhuma.
-        profArmasMarciais = true;
-        profArmaduras = true;
-        profEscudos = true;
-        profFerramentas = false;
-    }
-    public void setDraconato() {
-
-    }
-    public void setGnomo() {
-
-    }
-    public void setMeioElfo() {
-
-    }
-    public void setMeioOrc() {
-
-    }
-    public void setTiefling() {
-
-    }
-    // SETs CLASSES ---------------------------------
-    public void setBarbaro() {
-
-    }
-    public void setBardo() {
-    
-    }
-    public void setBruxo() {
-
-    }
-    public void setClerigo() {
-
-    }
-    public void setDruida() {
-
-    }
-    public void setFeiticeiro() {
-    
-    }
-    public void setGuerreiro() {
-
-    }
-    public void setLadino() {
-   
-    }
-    public void setMago() {
-    
-    }
-    public void setMonge() {
-    
-    }
-    public void setPaladino() {
-
-    }
-    public void setPatrulheiro() {
-
-    }
-
-    // SETs ANTECEDENTES ---------------------------------
-    public void setAcolito(){
-
-    }
-    public void setArtesaoDeGuilda(){
-    
-    }
-    public void setArtista(){
-    
-    }
-    public void setCharlatao(){
-
-    }
-    public void setCriminoso(){
-
-    }
-    public void setEremita(){
-
-    }
-    public void setForasteiro(){
-
-    }
-    public void setHeroiDoPovo(){
-
-    }
-    public void setMarinheiro(){
-    
-    }
-    public void setNobre(){
-    
-    }
-    public void setOrfao(){
-
-    }
-    public void setSabio(){
-
-    }
-    public void setSoldado(){
-
-    }
-
     public void setInfoDoPersonagem(String classe, String raca, String antecedentes){
         this.classe = classe;
         this.raca = raca;
@@ -192,7 +69,13 @@ public class Ficha {
     }
     public String getRaca(){
         return this.raca;
-    } 
+    }
+    public String getClasse(){
+        return this.classe;
+    }
+    public String getAntecedentes(){
+        return this.antecedentes;
+    }
     public String getNomePersonagem(){
         return this.nomeDoPersonagem;
     }

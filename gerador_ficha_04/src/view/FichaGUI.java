@@ -8,6 +8,7 @@ import model.FichaModeL;
 import java.util.Scanner;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,6 +25,7 @@ import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class FichaGUI extends JFrame{
 
@@ -44,6 +46,7 @@ public class FichaGUI extends JFrame{
     private JTextField campoTexto2;
     private String[] atributos = {"15","14","13","12","10","8"};
 
+
     private FichaController controller;
     private String[] pericias = { "Acrobacia", "Arcanismo", "Atletismo", "Atuação", "Blefar", "Furtividade", "História", "Intimidação", "Intuição", "Investigação", 
     "Lidar com os Animais", "Medicina", "Natureza", "Percepção","Persuasão", "Prestidigitação", "Religião", "Sobrevivência" };
@@ -51,6 +54,13 @@ public class FichaGUI extends JFrame{
     private String[] classes = { "Bárbaro", "Bardo", "Bruxo", "Clérigo", "Druida", "Feiticeiro", "Guerreiro", "Ladino","Mago", "Monge", "Paladino", "Patrulheiro" };
     private String[] antecendentes = { "Acólito", "Artesão de Guilda", "Artista", "Artista", "Charlatão", "Criminoso","Eremita", "Forasteiro", "Herói do Povo", 
     "Marinheiro", "Nobre", "Orfão", "Sábio", "Soldado" };
+
+    private String inputNomeJogador;
+    private String inputNomePersonagem;
+    private String inputClasse;
+    private String inputRaca;
+    private String inputAntecedente;
+    private int[] periciasEscolhidas;
 
     public FichaGUI() {
         super();
@@ -137,6 +147,7 @@ public class FichaGUI extends JFrame{
         comboAtribo = new JComboBox(atributos);
         comboAtribo.setBounds(100, 300, 100, 22);
         comboAtribo.setPreferredSize(new Dimension(100, 22));
+        comboAtribo.addItemListener(e -> controller.ideiaDeMartins(e, comboAtribo));
         comboAtribo.addItemListener(e4 -> controller.itemSelecionado_setCaracteristicas_dePersonagem(e4, atributos, comboAtribo));
 
         this.getContentPane().add(comboAtribo);
@@ -215,9 +226,25 @@ public class FichaGUI extends JFrame{
         confirmbotao = new JButton();
         confirmbotao.setText("Confirmar");
         confirmbotao.setBounds(780, 640, 85, 20);
-        confirmbotao.addItemListener(e0 -> controller.itemSelecionado_setCaracteristicas_dePersonagem(e0, null, null));
+        confirmbotao.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                inputNomeJogador = campoTexto1.getText();
+                inputNomePersonagem = campoTexto2.getText();
+                
+            }
+        });
         this.getContentPane().add(confirmbotao);
 
+    }
+
+    public String getNomePlayer(){
+        return inputNomeJogador;
+    }
+    public String getNomePersonagem(){
+        return inputNomePersonagem;
+    }
+    public String getRaca(){
+        return inputRaca;
     }
     
 

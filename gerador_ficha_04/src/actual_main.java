@@ -21,6 +21,7 @@ public class actual_main {
         InterfaceView.setControllerAtributos(CentralController); // Estabeleci a conectao do view para ouvir as acoes do controller
 
         InterfaceView.setVisible(true);
+        
     }
     
 }
